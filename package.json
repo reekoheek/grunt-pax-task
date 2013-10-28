@@ -1,19 +1,37 @@
 {
   "name": "grunt-pax-task",
-  "version": "0.0.1",
   "description": "pax grunt task",
-  "main": "Gruntfile.js",
-  "scripts": {
-    "test": "grunt test"
+  "version": "0.0.1",
+  "homepage": "https://github.com/reekoheek/grunt-pax-task",
+  "author": {
+    "name": "Jafar Shadiq",
+    "email": "reekoheek@gmail.com"
   },
-  "author": "Jafar Shadiq <reekoheek@gmail.com>",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/reekoheek/grunt-pax-task.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reekoheek/grunt-pax-task/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/reekoheek/grunt-pax-task/blob/master/LICENSE"
+    }
+  ],
+  "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
     "grunt-bower-task": "~0.3.2"
   },
   "peerDependencies": {

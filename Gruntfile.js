@@ -1,33 +1,47 @@
 require('shelljs/global');
 
-var fs = require('fs');
+var fs = require('fs'),
+    path = require('path'),
+    _ = require('lodash'),
+    Executor;
 
-var detectDependencies = function(config) {
+
+var detectConfiguration = function(config, packageJson) {
+    config.pkg = packageJson;
     try {
-        packageJson = fs.readFileSync('bower.json', {encoding: 'utf8'});
+        fs.readFileSync('bower.json', {encoding: 'utf8'});
         delete config.dependencies.nodep;
         config.dependencies.bower = {};
     } catch(e) {
+    }
+
+    if (packageJson.pax && packageJson.pax.config) {
+        for(var i in packageJson.pax.config) {
+            config[i] = _.extend(config[i] || {}, packageJson.pax.config[i]);
+        }
+    }
+};
+
+var preRun = function(config, grunt) {
+    if (config.pkg && config.pkg.pax && config.pkg.pax.prerun) {
+        var prerun = require(path.join(process.cwd(), config.pkg.pax.prerun));
+        prerun(grunt);
     }
 };
 
 module.exports = function(grunt) {
     var packageJson,
         config = {
-            pkg: grunt.file.readJSON('package.json'),
-            clean: {
-                // dependencies: [],
-                // build: [],
-                // release: []
-            },
             dependencies: {
                 nodep: {}
             }
         };
 
-    detectDependencies(config);
+    detectConfiguration(config, grunt.file.readJSON('package.json'));
 
     grunt.initConfig(config);
+
+    preRun(config, grunt);
 
     try {
         packageJson = fs.readFileSync('package.json', {encoding: 'utf8'});
@@ -38,9 +52,13 @@ module.exports = function(grunt) {
             throw new Error('Not grunt-pax-task');
         }
         grunt.loadTasks('tasks');
+        Executor = require('./lib/executor');
     } catch(e) {
         grunt.loadNpmTasks('grunt-pax-task');
+        Executor = require('grunt-pax-task/lib/executor');
     }
+
+    grunt.executor = new Executor(grunt);
 
     grunt.log.muted = true;
 

@@ -1,7 +1,7 @@
 {
   "name": "grunt-pax-task",
   "description": "pax grunt task",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "homepage": "https://github.com/reekoheek/grunt-pax-task",
   "author": {
     "name": "Jafar Shadiq",

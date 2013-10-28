@@ -4,19 +4,32 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pax-help', 'Help page', function() {});
     grunt.registerTask('help', 'Help page', function(sub) {
+        var i, tasks;
+
+        grunt.log.muted = false;
+
         if (sub == 'config') {
             grunt.log.subhead('Configuration');
             grunt.log.write(JSON.stringify(grunt.config(), null, 2));
         } else {
-            for(var i in grunt.task._tasks) {
-                if (i.indexOf('pax-') === 0) {
-                    if (sub == 'raw') {
-                        grunt.log.writeln(i);
-                    } else {
-                        grunt.log.write(i.substr('pax-'.length));
+            if (sub == 'raw') {
+                tasks = [];
+                for(i in grunt.task._tasks) {
+                    if (i.indexOf('pax-') === 0) {
+                        tasks.push(i);
+                    }
+                }
+                grunt.log.writeln(JSON.stringify(tasks, null, 2));
+            } else {
+                grunt.log.subhead('Available target:');
+                for(i in grunt.task._tasks) {
+                    if (i.indexOf('pax-') === 0) {
+                        grunt.log.writeln('- ' + i.substr('pax-'.length));
                     }
                 }
             }
         }
+
+        grunt.log.muted = true;
     });
 };

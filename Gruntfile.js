@@ -42,4 +42,6 @@ module.exports = function(grunt) {
         grunt.loadNpmTasks('grunt-pax-task');
     }
 
+    grunt.log.muted = true;
+
 };

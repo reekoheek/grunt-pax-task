@@ -40,6 +40,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pax-clean', 'Clean project', function() {});
     grunt.registerTask('clean', 'Clean project', function(depth) {
+        grunt.log.muted = false;
+
         depth = depth || 'all';
         grunt.log.subhead('Cleaning project for ' + depth + ' resources...');
 
@@ -53,5 +55,8 @@ module.exports = function(grunt) {
                 grunt.task.run('contrib-clean:' + DEPTH_LEVELS[i]);
             }
         }
+
+        grunt.log.muted = true;
+
     });
 };

@@ -3,6 +3,13 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pax-build', 'Build project', function() {});
     grunt.registerTask('build', 'Build project', function() {
+        grunt.log.muted = false;
+
+        grunt.log.subhead('Building project...');
+
         grunt.log.error('task is not defined yet!');
+
+        grunt.log.muted = true;
+
     });
 };

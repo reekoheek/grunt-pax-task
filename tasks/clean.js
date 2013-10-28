@@ -52,6 +52,7 @@ module.exports = function(grunt) {
             }
 
             if (toRun && DEPTH_LEVELS[i] != 'all') {
+                grunt.log.writeln('  Cleaning target ' + DEPTH_LEVELS[i] + '...');
                 grunt.task.run('contrib-clean:' + DEPTH_LEVELS[i]);
             }
         }

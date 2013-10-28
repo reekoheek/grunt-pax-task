@@ -1,0 +1,29 @@
+{
+  "name": "grunt-pax-task",
+  "version": "0.0.1",
+  "description": "pax grunt task",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "Jafar Shadiq <reekoheek@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-bower-task": "~0.3.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "lodash": "~2.2.1",
+    "shelljs": "~0.2.6"
+  }
+}

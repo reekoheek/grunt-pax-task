@@ -5,6 +5,7 @@ var fs = require('fs'),
     _ = require('lodash'),
     Executor;
 
+global.DEBUG_START_TIME = (new Date()).getTime();
 
 var detectConfiguration = function(config, packageJson) {
     config.pkg = packageJson;
@@ -42,6 +43,19 @@ module.exports = function(grunt) {
     grunt.initConfig(config);
 
     preRun(config, grunt);
+
+    var oldFailReport = grunt.fail.report;
+    grunt.fail.report = function() {
+        global.DEBUG_STOP_TIME = (new Date()).getTime();
+
+        oldFailReport.apply(this, arguments);
+
+        if (process.argv[1] !== 'help:json' && process.argv[1] !== 'help:raw') {
+            grunt.log.muted = false;
+            grunt.log.writeln('Grunt elapsed: ' + (global.DEBUG_STOP_TIME - global.DEBUG_START_TIME));
+        }
+
+    };
 
     try {
         packageJson = fs.readFileSync('package.json', {encoding: 'utf8'});
